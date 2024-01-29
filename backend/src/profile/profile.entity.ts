@@ -9,10 +9,12 @@ import {
   OneToOne,
   JoinTable,
   JoinColumn,
+  Unique,
 } from 'typeorm';
 import { Users } from 'src/auth/users.entity';
 
 @Entity('Profile')
+@Unique(['user'])
 export class Profile extends BaseEntity {
   @PrimaryGeneratedColumn()
   id: number;
@@ -49,5 +51,8 @@ export class Profile extends BaseEntity {
 
   @OneToOne(() => Users, (user) => user.profile)
   @JoinColumn()
-  user: Users[];
+  user: Users;
+
+  @Column()
+  userId: number;
 }
