@@ -4,7 +4,7 @@ import { Users } from 'src/auth/users.entity';
 import { CommentFavorited } from 'src/comment-favorited/comment-favorited.entity';
 import { CommentRetweet } from 'src/comment-retweet/comment-retweet.entity';
 import { Comment } from 'src/comment/comment.entity';
-import { Follower } from 'src/follower/follower.entity';
+import { Profile } from 'src/profile/profile.entity';
 import { TweetFavorited } from 'src/tweet-favorited/tweet-favorited.entity';
 import { TweetRetweet } from 'src/tweet-retweet/tweet-retweet.entity';
 import { Tweet } from 'src/tweet/tweet.entity';
@@ -23,10 +23,10 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
     Tweet,
     Comment,
     CommentFavorited,
-    Follower,
     TweetFavorited,
     TweetRetweet,
     CommentRetweet,
+    Profile,
   ],
   synchronize: process.env.TYPEORM_SYNC || dbConfig.synchronize,
 };

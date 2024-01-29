@@ -1,9 +1,3 @@
-import { CommentFavorited } from 'src/comment-favorited/comment-favorited.entity';
-import { CommentRetweet } from 'src/comment-retweet/comment-retweet.entity';
-import { Comment } from 'src/comment/comment.entity';
-import { TweetFavorited } from 'src/tweet-favorited/tweet-favorited.entity';
-import { TweetRetweet } from 'src/tweet-retweet/tweet-retweet.entity';
-import { Tweet } from 'src/tweet/tweet.entity';
 import {
   BaseEntity,
   Unique,
@@ -12,10 +6,19 @@ import {
   Column,
   OneToMany,
   ManyToMany,
-  JoinTable,
+  OneToOne,
   CreateDateColumn,
   UpdateDateColumn,
+  JoinTable,
+  JoinColumn,
 } from 'typeorm';
+import { Tweet } from 'src/tweet/tweet.entity';
+import { Comment } from 'src/comment/comment.entity';
+import { CommentFavorited } from 'src/comment-favorited/comment-favorited.entity';
+import { TweetFavorited } from 'src/tweet-favorited/tweet-favorited.entity';
+import { TweetRetweet } from 'src/tweet-retweet/tweet-retweet.entity';
+import { CommentRetweet } from 'src/comment-retweet/comment-retweet.entity';
+import { Profile } from './../profile/profile.entity';
 
 @Entity('Users')
 @Unique(['username', 'email'])
@@ -72,4 +75,10 @@ export class Users extends BaseEntity {
 
   @ManyToMany(() => Users, (user) => user.followers)
   following: Users[];
+
+  @OneToOne(() => Profile, (profile) => profile.user, {
+    cascade: true,
+    nullable: true,
+  })
+  profile: Profile;
 }
